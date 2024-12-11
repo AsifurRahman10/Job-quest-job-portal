@@ -1,13 +1,49 @@
 import { Typography, Input, Button } from "@material-tailwind/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import Lottie from "lottie-react";
 import register from "../../public/register.json";
+import { AuthContext } from "../Provider/AuthProvider";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const Register = () => {
   const [passwordShown, setPasswordShown] = useState(false);
+  const [error, setError] = useState("");
+  console.log(error);
+  const { emailRegister, googleLogin } = useContext(AuthContext);
   const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    setError("");
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const regexPattern = /^(?=.*[A-Z])(?=.*\d).+$/;
+    if (!regexPattern.test(password)) {
+      setError("Invalid Password");
+      return;
+    }
+    emailRegister(email, password).then((res) => {
+      console.log(res);
+      toast("user has been created");
+    });
+  };
+
   return (
     <div className="flex w-9/12 mx-auto items-center">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="flex-1">
         <section className="grid text-center min-h-[calc(100vh-110px)] items-center p-8 pt-0">
           <div>
@@ -17,7 +53,10 @@ export const Register = () => {
             <Typography className="mb-16 text-gray-600 font-normal text-[18px]">
               Please fill up the below information for creating an account
             </Typography>
-            <form action="#" className="mx-auto max-w-[24rem] text-left">
+            <form
+              className="mx-auto max-w-[24rem] text-left"
+              onSubmit={handleRegister}
+            >
               <div className="mb-6">
                 <label htmlFor="email">
                   <Typography
@@ -30,8 +69,8 @@ export const Register = () => {
                 <Input
                   color="gray"
                   size="lg"
-                  type="email"
-                  name="email"
+                  type="name"
+                  name="name"
                   placeholder="Your name"
                   className="w-full placeholder:opacity-100 focus:border-t-primary border-t-blue-gray-200"
                   labelProps={{
@@ -49,7 +88,6 @@ export const Register = () => {
                   </Typography>
                 </label>
                 <Input
-                  id="email"
                   color="gray"
                   size="lg"
                   type="email"
@@ -71,6 +109,7 @@ export const Register = () => {
                   </Typography>
                 </label>
                 <Input
+                  name="password"
                   size="lg"
                   placeholder="********"
                   labelProps={{
@@ -89,9 +128,17 @@ export const Register = () => {
                   }
                 />
               </div>
-              <Button color="gray" size="lg" className="mt-6" fullWidth>
+
+              <Button
+                type="submit"
+                color="gray"
+                size="lg"
+                className="mt-6"
+                fullWidth
+              >
                 sign in
               </Button>
+              {error && <p className="mt-6 text-red-600">{error}</p>}
               <div className="!mt-4 flex justify-end">
                 <Typography
                   as="a"
@@ -108,6 +155,7 @@ export const Register = () => {
                 size="lg"
                 className="mt-6 flex h-12 items-center justify-center gap-2"
                 fullWidth
+                onClick={googleLogin}
               >
                 <img
                   src={`https://www.material-tailwind.com/logos/logo-google.png`}

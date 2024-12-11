@@ -1,11 +1,33 @@
 import { Typography, Input, Button } from "@material-tailwind/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import Lottie from "lottie-react";
 import login from "../../public/login.json";
+import { AuthContext } from "../Provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 export const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const { emailLogin } = useContext(AuthContext);
   const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    setError("");
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    emailLogin(email, password)
+      .then((res) => {
+        console.log(res);
+        form.reset();
+        navigate("/");
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  };
   return (
     <div className="flex w-9/12 mx-auto items-center">
       <div className="flex-1">
@@ -17,7 +39,10 @@ export const Login = () => {
             <Typography className="mb-16 text-gray-600 font-normal text-[18px]">
               Enter your email and password to sign in
             </Typography>
-            <form action="#" className="mx-auto max-w-[24rem] text-left">
+            <form
+              onSubmit={handleSignIn}
+              className="mx-auto max-w-[24rem] text-left"
+            >
               <div className="mb-6">
                 <label htmlFor="email">
                   <Typography
@@ -28,7 +53,6 @@ export const Login = () => {
                   </Typography>
                 </label>
                 <Input
-                  id="email"
                   color="gray"
                   size="lg"
                   type="email"
@@ -50,6 +74,7 @@ export const Login = () => {
                   </Typography>
                 </label>
                 <Input
+                  name="password"
                   size="lg"
                   placeholder="********"
                   labelProps={{
@@ -68,9 +93,16 @@ export const Login = () => {
                   }
                 />
               </div>
-              <Button color="gray" size="lg" className="mt-6" fullWidth>
+              <Button
+                type="submit"
+                color="gray"
+                size="lg"
+                className="mt-6"
+                fullWidth
+              >
                 sign in
               </Button>
+              {error && <p className="text-red-600 mt-6">{error}</p>}
               <div className="!mt-4 flex justify-end">
                 <Typography
                   as="a"

@@ -4,6 +4,7 @@ import {
   Typography,
   Button,
   IconButton,
+  Collapse,
 } from "@material-tailwind/react";
 import { useState } from "react";
 import logo from "../../public/logo.jpg";
@@ -12,7 +13,7 @@ import { Link } from "react-router-dom";
 export const NavbarComponent = () => {
   const [openNav, setOpenNav] = useState(false);
   const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 font-OpenSans">
       <Typography
         as="li"
         variant="small"
@@ -128,7 +129,7 @@ export const NavbarComponent = () => {
             </IconButton>
           </div>
         </div>
-        <MobileNav open={openNav}>
+        <Collapse open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
             <Button fullWidth variant="text" size="sm" className="">
@@ -138,7 +139,7 @@ export const NavbarComponent = () => {
               <span>Sign In</span>
             </Button>
           </div>
-        </MobileNav>
+        </Collapse>
       </Navbar>
     </div>
   );
