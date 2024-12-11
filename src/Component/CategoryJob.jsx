@@ -8,27 +8,40 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 
 export const CategoryJob = () => {
   return (
     <div>
-      <Title
-        title={"Browse by category"}
-        para={
-          "Explore a variety of topics, organized into easy-to-navigate categories."
-        }
-      ></Title>
+      <div className="mb-10">
+        <Title
+          title={"Browse by category"}
+          para={
+            "Explore a variety of topics, organized into easy-to-navigate categories."
+          }
+        ></Title>
+      </div>
       <Swiper
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         slidesPerView={3}
         spaceBetween={30}
-        navigation={true}
+        // navigation={true}
         breakpoints={{
-          640: { slidesPerView: 1, spaceBetween: 20 },
-          768: { slidesPerView: 2, spaceBetween: 40 },
-          1024: { slidesPerView: 3, spaceBetween: 50 },
+          // For small screens (mobile)
+          320: { slidesPerView: 1, spaceBetween: 10 },
+          // For slightly larger mobile screens
+          480: { slidesPerView: 1.5, spaceBetween: 15 },
+          // For tablets
+          768: { slidesPerView: 2, spaceBetween: 20 },
+          // For desktops
+          1024: { slidesPerView: 3, spaceBetween: 30 },
+          // For larger desktops
+          1440: { slidesPerView: 4, spaceBetween: 40 },
         }}
-        modules={[Navigation]}
+        modules={[Autoplay, Navigation]}
         className="mySwiper"
       >
         <SwiperSlide>
