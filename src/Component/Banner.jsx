@@ -6,7 +6,7 @@ import "animate.css";
 
 export const Banner = () => {
   return (
-    <div className="flex p-4 items-center gap-6">
+    <div className="flex p-4 items-center gap-10 lg:gap-6 flex-col lg:flex-row">
       <div className="flex-1">
         <div className=" animate__animated animate__fadeInUp">
           <h2 className="text-6xl font-bold ">

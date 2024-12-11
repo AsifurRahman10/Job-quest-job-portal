@@ -58,7 +58,7 @@ export const NavbarComponent = () => {
   );
 
   return (
-    <div className="w-9/12 mx-auto">
+    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
       <Navbar className="sticky top-0 z-10 h-max max-w-full bg-transparent border-none rounded-none px-4 py-2 lg:px-8 lg:py-2 shadow-none">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
