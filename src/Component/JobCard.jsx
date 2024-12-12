@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
+
 export const JobCard = ({ job }) => {
   const {
+    _id,
     title,
     location,
     jobType,
@@ -49,9 +52,11 @@ export const JobCard = ({ job }) => {
         <p className="text-[#3b65f5] font-semibold text-lg">
           ৳{salaryRange.min} - ৳{salaryRange.max}/month
         </p>
-        <button className="px-4 py-2 bg-[#3b65f5] text-white rounded-lg text-sm hover:bg-blue-700 transition">
-          Apply Now
-        </button>
+        <Link to={`/JobDetails/${_id}`}>
+          <button className="px-4 py-2 bg-[#3b65f5] text-white rounded-lg text-sm hover:bg-blue-700 transition">
+            Apply Now
+          </button>
+        </Link>
       </div>
     </div>
   );
