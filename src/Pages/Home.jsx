@@ -1,5 +1,6 @@
 import { Banner } from "../Component/Banner";
 import { CategoryJob } from "../Component/CategoryJob";
+import { LatestJobs } from "../Component/LatestJobs";
 
 export const Home = () => {
   return (
@@ -9,6 +10,9 @@ export const Home = () => {
       </section>
       <section className="mt-20">
         <CategoryJob></CategoryJob>
+      </section>
+      <section className="mt-20">
+        <LatestJobs></LatestJobs>
       </section>
     </div>
   );
