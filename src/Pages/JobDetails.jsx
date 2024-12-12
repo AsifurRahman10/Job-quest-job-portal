@@ -5,7 +5,7 @@ import {
   FaRegBuilding,
 } from "react-icons/fa";
 import jobImg from "../assets/banner-happy.jpg";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { CiClock1, CiLocationArrow1 } from "react-icons/ci";
 import { Button } from "@material-tailwind/react";
 import { BsFillCupFill } from "react-icons/bs";
@@ -50,9 +50,11 @@ export const JobDetails = () => {
           </div>
         </div>
         <div>
-          <Button className="bg-[#3b65f5] py-4 px-8 rounded-md">
-            Apply Now
-          </Button>
+          <Link to={`/applyNow/${_id}`}>
+            <Button className="bg-[#3b65f5] py-4 px-8 rounded-md">
+              Apply Now
+            </Button>
+          </Link>
         </div>
       </div>
       <hr className="mt-4 border-gray-900" />
