@@ -6,6 +6,7 @@ import { Register } from "../Pages/Register";
 import { AllJobs } from "../Pages/AllJobs";
 import { JobDetails } from "../Pages/JobDetails";
 import { ApplyNow } from "../Pages/ApplyNow";
+import { MyAppliedJobs } from "../Pages/MyAppliedJobs";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/applyNow/:id",
         element: <ApplyNow></ApplyNow>,
+      },
+      {
+        path: "myAppliedJobs",
+        element: <MyAppliedJobs></MyAppliedJobs>,
       },
       {
         path: "/register",

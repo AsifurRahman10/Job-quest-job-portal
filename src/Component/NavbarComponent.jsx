@@ -32,9 +32,9 @@ export const NavbarComponent = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Account
-        </a>
+        <Link to={"myAppliedJobs"} className="flex items-center">
+          My Applied Jobs
+        </Link>
       </Typography>
       <Typography
         as="li"
